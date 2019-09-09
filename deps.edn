@@ -1,0 +1,10 @@
+{
+ byte-streams             {:mvn/version "0.2.5-alpha2"}
+ hiccup                   {:mvn/version "1.0.5"}
+ manifold                 {:mvn/version "0.1.9-alpha3"}
+ org.clojure/data.codec   {:mvn/version "0.1.0"}
+ org.clojure/tools.reader {:mvn/version "1.0.0-beta4"}
+ potemkin                 {:mvn/version "0.4.5"}
+ prismatic/schema         {:mvn/version "1.1.9"}
+ ring/ring-core           {:mvn/version "1.7.1"}
+ }
