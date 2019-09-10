@@ -1,10 +1,99 @@
 {
- byte-streams             {:mvn/version "0.2.5-alpha2"}
- hiccup                   {:mvn/version "1.0.5"}
- manifold                 {:mvn/version "0.1.9-alpha3"}
- org.clojure/data.codec   {:mvn/version "0.1.0"}
- org.clojure/tools.reader {:mvn/version "1.0.0-beta4"}
- potemkin                 {:mvn/version "0.4.5"}
- prismatic/schema         {:mvn/version "1.1.9"}
- ring/ring-core           {:mvn/version "1.7.1"}
+ :paths ["resources" "src"]
+ :deps {
+        byte-streams             {:mvn/version "0.2.5-alpha2"}
+        hiccup                   {:mvn/version "1.0.5"}
+        manifold                 {:mvn/version "0.1.9-alpha3"}
+        org.clojure/clojure      {:mvn/version "1.10.1"}
+        org.clojure/data.codec   {:mvn/version "0.1.0"}
+        org.clojure/tools.reader {:mvn/version "1.0.0-beta4"}
+        potemkin                 {:mvn/version "0.4.5"}
+        prismatic/schema         {:mvn/version "1.1.9"}
+        ring/ring-core           {:mvn/version "1.7.1"}
+        }
+ :aliases {
+           :dev {
+                 :extra-paths ["dev/src" "dev/resources"]
+                 ;; :jvm-opts [
+                 ;;            "-Xms1g" "-Xmx1g"
+                 ;;            "-server"
+                 ;;            "-Dio.netty.leakDetectionLevel=paranoid"
+                 ;;            "-Dyada.dir=."
+                 ;;            ]
+                 :extra-deps {
+                              ;; REPL and dev workflow
+                              org.clojure/tools.namespace          {:mvn/version "0.2.11"}
+                              org.clojure/tools.nrepl              {:mvn/version "0.2.13"}
+                              com.stuartsierra/component           {:mvn/version "0.3.2"}
+                              aero                                 {:mvn/version "1.0.1"}
+
+                              ;; Publishing user manual
+                              camel-snake-kebab                    {:mvn/version "0.4.0"}
+                              org.asciidoctor/asciidoctorj         {:mvn/version "1.6.0-alpha.6"}
+                              org.asciidoctor/asciidoctorj-diagram {:mvn/version "1.5.11"}
+                              net.sourceforge.plantuml/plantuml    {:mvn/version "1.2018.13"}
+
+                              ;; Performance testing
+                              criterium                            {:mvn/version "0.4.4"}
+                              markdown-clj                         {:mvn/version "0.9.91"}
+                              }
+                 }
+           :test {
+                  :extra-deps {
+                               org.clojure/tools.logging               {:mvn/version "0.4.1"}
+                               ch.qos.logback/logback-classic          {:mvn/version "1.1.8"
+                                                                        :exclusions [org.slf4j/slf4j-api]}
+                               org.slf4j/jul-to-slf4j                  {:mvn/version "1.7.22"}
+                               org.slf4j/jcl-over-slf4j                {:mvn/version "1.7.22"}
+                               org.slf4j/log4j-over-slf4j              {:mvn/version "1.7.22"}
+                               ring/ring-mock                          {:mvn/version "0.3.2"}
+                               juxt/iota                               {:mvn/version "0.2.3"}
+                               org.webjars/bootstrap                   {:mvn/version "3.3.6"}
+                               bidi                                    {:mvn/version "2.1.3"}
+                               aleph                                   {:mvn/version "0.4.7-alpha5"}
+                               org.clojure/core.async                  {:mvn/version "0.3.442"}
+                               cheshire                                {:mvn/version "5.8.0"
+                                                                        :exclusions [com.fasterxml.jackson.core/jackson-core]}
+                               json-html                               {:mvn/version "0.4.0"
+                                                                        :exclusions [hiccups]}
+                               buddy/buddy-sign                        {:mvn/version "3.0.0"}
+                               commons-codec                           {:mvn/version "1.11"}
+                               metosin/ring-swagger                    {:mvn/version "0.26.0"
+                                                                        :exclusions [org.clojure/clojure]}
+                               org.webjars/swagger-ui                  {:mvn/version "2.2.6"}
+                               com.cognitect/transit-clj               {:mvn/version "0.8.297"
+                                                                        :exclusions [com.fasterxml.jackson.core/jackson-core]}
+                               org.webjars/webjars-locator             {:mvn/version "0.34"
+                                                                        :exclusions [com.fasterxml.jackson.core/jackson-core]}
+                               com.fasterxml.jackson.core/jackson-core {:mvn/version "2.9.0"}
+                               }
+                  :extra-paths [
+                                "bundles/default/test"
+                                ;; We use the 'default' bundle, that contains the most
+                                ;; test coverage. Tests for other bundles can be
+                                ;; run from the bundle directory itself.
+                                "bundles/default/src"
+
+                                ;; source directories of dependency modules.
+                                "ext/aleph/src"
+                                "ext/async/src"
+                                "ext/bidi/src"
+                                "ext/json/src"
+                                "ext/json-html/src"
+                                "ext/jwt/src"
+                                "ext/multipart/src"
+                                "ext/oauth2/src"
+                                "ext/swagger/src"
+                                "ext/transit/src"
+                                "ext/webjars/src"]
+                  }
+
+           ;;https://github.com/Olical/depot
+           ;; check for deps updates
+           ;; `clojure -Aoutdated -a outdated`
+           ;; auto update deps
+           ;;  `clojure -m depot.outdated.main --update`
+           :outdated {:extra-deps {olical/depot {:mvn/version "1.8.4"}}
+                      :main-opts  ["-m" "depot.outdated.main" "-a" "outdated"]}
+           }
  }
