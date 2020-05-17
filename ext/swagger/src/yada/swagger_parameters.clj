@@ -130,7 +130,7 @@
         method (:method ctx)
         request (:request ctx)
         matcher (fn [param-kw]
-                  (get-in ctx [:resource :parameters method :coercion-matchers param-kw]))
+                  (get-in ctx [:resource :methods method :coercion-matchers param-kw]))
 
         schemas (util/merge-parameters (get-in ctx [:resource :parameters])
                                        (get-in ctx [:resource :methods method :parameters]))
